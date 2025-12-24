@@ -1,0 +1,23 @@
+[{
+    "id":1,
+    "name":"The Walking Dead ",
+    "IMDB":8.1,
+    "WatchNow":"https://attackertv.so/tv/the-walking-dead-39550"
+
+},{
+    "id":2,
+    "name":"Game of Thrones ",
+    "IMDB":9.2,
+    "WatchNow":"https://attackertv.so/tv/game-of-thrones-39539"
+},{
+    "id":3,
+ "name":"Wednesday ",
+ "IMDB":8,
+ "WatchNow":"https://attackertv.so/tv/wednesday-90553"
+},{
+    "id":4,
+  "name":"Stranger Things ",
+ "IMDB":8.6,
+ "WatchNow":"https://attackertv.so/tv/stranger-things-39444"  
+}
+]

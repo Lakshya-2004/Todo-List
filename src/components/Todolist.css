@@ -1,0 +1,99 @@
+/* Page reset + background */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background-color: wheat;
+}
+
+/* Date & Time */
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 28px;        /* requested */
+  color: #222;
+}
+
+/* Form container */
+form {
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fafafa; /* grey form bg */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Todo title */
+form h2 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 26px;        /* requested */
+  color: #111;
+}
+
+/* Input */
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #444;
+  font-size: 16px;
+  color: #000;
+}
+
+/* Buttons (ALL buttons) */
+button {
+  padding: 8px 14px;
+  margin: 4px 6px 0 0;
+  border: none;
+  border-radius: 6px;
+  background-color: black; /* requested */
+  color: white;            /* requested */
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  opacity: 0.85;
+}
+
+/* Todo list */
+div ul {
+  max-width: 420px;
+  margin: 20px auto;
+  list-style: none;
+  padding: 0;
+}
+
+/* Todo item */
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Todo text */
+li span {
+  flex: 1;
+  font-size: 18px;
+  color: #000;
+  word-break: break-word;
+}
+
+/* Action buttons spacing */
+li button {
+  margin-left: 6px;
+  padding: 6px 10px;
+  font-size: 13px;
+}
