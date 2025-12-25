@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import "./Todolist.css";
 
+const todoname = "Todostorage";
+
 export const Todolist = () => {
   const [filling, setFill] = useState({
     id: "",
@@ -8,59 +10,63 @@ export const Todolist = () => {
     checked: false,
   });
 
-  const [todo, setTodo] = useState([]);
+  const [todo, setTodo] = useState(() => {
+    const gettodo = localStorage.getItem(todoname);
+    if (!gettodo) return [];
+    return JSON.parse(gettodo);
+  });
+
   const [datetime, setDate] = useState("");
 
   useEffect(() => {
     const interval = setInterval(() => {
       const now = new Date();
-      const date = now.toLocaleDateString();
-      const time = now.toLocaleTimeString();
-      setDate(`${date}-${time}`);
+      setDate(`${now.toLocaleDateString()} - ${now.toLocaleTimeString()}`);
     }, 1000);
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+  localStorage.setItem(todoname, JSON.stringify(todo));
+}, [todo]);
+
+ 
+
   const handlevalue = (value) => {
     setFill({
-      id: value,          
-      content: value,          
+      id: value,
+      content: value,
       checked: false,
     });
   };
 
   const handleform = (e) => {
     e.preventDefault();
+    if (!filling.content.trim()) return;
 
-    const { id, content, checked } = filling;
-    if (!content.trim()) return;
-
-    const iftodohaveit = todo.find(
-      (curr) => curr.content.toLowerCase() === content.toLowerCase()
+    const exists = todo.some(
+      (item) =>
+        item.content.toLowerCase() === filling.content.toLowerCase()
     );
-    if (iftodohaveit) return;
+    if (exists) return;
 
-    setTodo((prev) => [...prev, { id, content, checked }]);
-
-    setFill({ id: "", content: "", checked: false }); 
+    setTodo((prev) => [...prev, filling]);
+    setFill({ id: "", content: "", checked: false });
   };
 
-  const clearbtn = () => {
-    setTodo([]);
-  };
+  const clearbtn = () => setTodo([]);
 
   const Deletebtn = (item) => {
-    const updatedtask = todo.filter((prev) => prev.id !== item.id);
-    setTodo(updatedtask);
+    setTodo(todo.filter((t) => t.id !== item.id));
   };
 
-
-const handlecheck=(item)=>{
-const updatedtodo=todo.map((prev)=>
-    prev.id===item.id ?{...prev ,checked:!prev.checked}:prev
-);
-    setTodo(updatedtodo);
-};
+  const handlecheck = (item) => {
+    setTodo(
+      todo.map((prev) =>
+        prev.id === item.id ? { ...prev, checked: !prev.checked } : prev
+      )
+    );
+  };
 
   return (
     <>
@@ -81,34 +87,25 @@ const updatedtodo=todo.map((prev)=>
         </button>
       </form>
 
-      <div>
-        <ul>
-          {todo.map((item) => (
-            <li key={item.id}>
-              <span
-                style={{
-                  textDecoration: item.checked
-                    ? "line-through"
-                    : "none",
-                }}
-              >
-                {item.content}
-              </span>
+      <ul>
+        {todo.map((item) => (
+          <li key={item.id}>
+            <span
+              style={{
+                textDecoration: item.checked ? "line-through" : "none",
+              }}
+            >
+              {item.content}
+            </span>
 
-               <button onClick={() => handlecheck(item)}>
-                {item.checked ? "Unchecked" : "Checked"}
-              </button> 
- 
-              <button
-                className="btn"
-                onClick={() => Deletebtn(item)}
-              >
-                Delete
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+            <button onClick={() => handlecheck(item)}>
+              {item.checked ? "Unchecked" : "Checked"}
+            </button>
+
+            <button onClick={() => Deletebtn(item)}>Delete</button>
+          </li>
+        ))}
+      </ul>
     </>
   );
 };
