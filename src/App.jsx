@@ -4,10 +4,10 @@
 // import Netflix from "./components/Netflix";
 // import { Login } from "./components/Login";
 // import { SignUp } from "./components/SignUp";
+
 import { Todolist } from "./components/Todolist";
 export const App =()=>{
   return <Todolist/>
 
 
-;
 }
